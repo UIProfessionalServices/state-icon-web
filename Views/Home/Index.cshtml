@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">ICON Query</h1>
+</div>
+
+
+<form method="post">
+    <div class="form-group">
+        <label for="ssn">SSN</label>
+        <input type="text" class="form-control" id="ssn" name="ssn" placeholder="Enter SSN">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<br />
+
+@if (!string.IsNullOrEmpty((string)ViewData["message"]))
+{
+    <div class="alert alert-secondary">@ViewData["message"]</div>
+}
