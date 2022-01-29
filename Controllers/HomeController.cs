@@ -12,15 +12,15 @@ namespace state_icon_web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ISidClient sidClient;
+        private readonly ISidClient _sidClient;
 
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger, ISidClient sidClient)
         {
             _logger = logger;
-            this.sidClient = sidClient;
-            sidClient.JwtToken = "123";
+            _sidClient = sidClient;
+            _sidClient.JwtToken = "123";
 
         }
 
@@ -40,11 +40,11 @@ namespace state_icon_web.Controllers
                 TerminalId = "1235"
             };
 
-            var response = sidClient.FindSsnAsync(viewModel);
+            var response = _sidClient.FindSsnAsync(viewModel);
 
-            ViewData["message"] = response.Result.ToJson();
+            ViewData["ssn"] = ssn;
 
-            return View();
+            return View(response.Result) ;
         }
 
         public IActionResult Privacy()

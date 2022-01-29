@@ -1,4 +1,9 @@
-﻿@{
+﻿
+@using Icon.Communication.Sid;
+
+@model SidViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -10,14 +15,48 @@
 <form method="post">
     <div class="form-group">
         <label for="ssn">SSN</label>
-        <input type="text" class="form-control" id="ssn" name="ssn" placeholder="Enter SSN">
+        <select class="form-control" id="ssn" name="ssn">
+            <option>725-62-9564</option>
+        </select>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 <br />
 
-@if (!string.IsNullOrEmpty((string)ViewData["message"]))
+@if (Model != null)
 {
-    <div class="alert alert-secondary">@ViewData["message"]</div>
+    <div class="row">
+        <div class="col-sm-2">SSN</div>
+        <div class="col-sm-10">@ViewData["ssn"]</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">Response Guid</div>
+        <div class="col-sm-10">@Model.RequestGuid</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">Latest Quarter</div>
+        <div class="col-sm-10">@Model.LatestQuarterOnHub</div>
+    </div>
+
+    <br />
+
+    <div>States with Wages</div>
+    @foreach (var state in Model.StatesWithWages)
+    {
+        <div>@state</div>
+    }
+    <br />
+    <div>States with Claims</div>
+    @foreach (var state in Model.StatesWithClaims)
+    {
+        <div>@state</div>
+    }
+    <br />
+    <div>States with Overpayments</div>
+    @foreach (var state in Model.StatesWithOverpayments)
+    {
+        <div>@state</div>
+    }
+    <br />
 }
